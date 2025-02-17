@@ -119,12 +119,12 @@ const Signup = () => {
                                 <Input
                                     type="radio"
                                     name="role"
-                                    value="student"
-                                    checked={input.role === 'student'}
+                                    value="Employee"
+                                    checked={input.role === 'Employee'}
                                     onChange={changeEventHandler}
                                     className="cursor-pointer"
                                 />
-                                <Label htmlFor="r1">Student</Label>
+                                <Label htmlFor="r1">Employee</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Input

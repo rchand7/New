@@ -33,7 +33,7 @@ export const postJob = async (req, res) => {
         console.log(error);
     }
 }
-// student k liye
+// Employee k liye
 export const getAllJobs = async (req, res) => {
     try {
         const keyword = req.query.keyword || "";
@@ -60,7 +60,7 @@ export const getAllJobs = async (req, res) => {
         console.log(error);
     }
 }
-// student
+// Employee
 export const getJobById = async (req, res) => {
     try {
         const jobId = req.params.id;

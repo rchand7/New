@@ -1,38 +1,51 @@
-import mongoose from "mongoose";
+// models/user.model.js
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     fullname: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     phoneNumber: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
     },
-    password:{
-        type:String,
-        required:true,
+    password: {
+        type: String,
+        required: true,
     },
-    role:{
-        type:String,
-        enum:['student','recruiter'],
-        required:true
+    role: {
+        type: String,
+        enum: ['admin', 'user'],
+        required: true,
     },
-    profile:{
-        bio:{type:String},
-        skills:[{type:String}],
-        resume:{type:String}, // URL to resume file
-        resumeOriginalName:{type:String},
-        company:{type:mongoose.Schema.Types.ObjectId, ref:'Company'}, 
-        profilePhoto:{
-            type:String,
-            default:""
-        }
+    profile: {
+        profilePhoto: {
+            type: String,
+            required: false,
+        },
+        bio: {
+            type: String,
+            required: false,
+        },
+        skills: {
+            type: [String],
+            required: false,
+        },
+        resume: {
+            type: String,
+            required: false,
+        },
+        resumeOriginalName: {
+            type: String,
+            required: false,
+        },
     },
-},{timestamps:true});
+}, { timestamps: true });
+
 export const User = mongoose.model('User', userSchema);
