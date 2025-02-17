@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'user'],
+        enum: ['Employee', 'Recruiter'],  // Corrected to Employee and Recruiter
         required: true,
     },
     profile: {

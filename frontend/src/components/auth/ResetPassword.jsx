@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { useParams, useNavigate } from 'react-router-dom';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
@@ -11,8 +11,8 @@ const ResetPassword = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [passwordError, setPasswordError] = useState(""); // Track password validation error
-    const { token } = useParams(); // Get token from URL params
+    const [passwordError, setPasswordError] = useState(""); 
+    const { token } = useParams(); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const ResetPassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Validate password
         if (!password) {
             setPasswordError("Password is required.");
@@ -36,22 +36,26 @@ const ResetPassword = () => {
             setPasswordError("Passwords do not match.");
             return;
         }
-        setPasswordError(""); // Clear error message if valid
-        
+        setPasswordError(""); 
+
         try {
             setLoading(true);
-            const response = await axios.post(`${USER_API_END_POINT}/reset-password`, { password, token });
+            console.log("Reset Token:", token); // Debugging
+
+            // Update this to send 'newPassword' instead of 'password'
+            const response = await axios.post(`${USER_API_END_POINT}/reset-password/${token}`, { 
+                newPassword: password,  // Send 'newPassword' to match backend
+                confirmPassword,  // Keep this if necessary on backend for validation
+                token 
+            });
+
             if (response.data.success) {
                 toast.success(response.data.message);
-                navigate("/login"); // Redirect to login after successful reset
+                navigate("/login");
             }
         } catch (error) {
-            // Handle server errors
-            if (error.response && error.response.data) {
-                toast.error(error.response.data.message || "An unexpected error occurred.");
-            } else {
-                toast.error("An error occurred. Please try again later.");
-            }
+            console.error("Reset Password Error:", error.response ? error.response.data : error);
+            toast.error(error.response?.data?.message || "An unexpected error occurred.");
         } finally {
             setLoading(false);
         }
@@ -70,7 +74,7 @@ const ResetPassword = () => {
                         placeholder="Enter new password"
                         required
                     />
-                    {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>} {/* Show password error */}
+                    {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
                 </div>
                 <div className="my-2">
                     <Label>Confirm Password</Label>

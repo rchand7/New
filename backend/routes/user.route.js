@@ -1,17 +1,24 @@
 import express from "express";
-import { login, logout, register, updateProfile, forgotPassword, resetPassword } from "../controllers/user.controller.js";
+import {
+  login,
+  logout,
+  register,
+  updateProfile,
+  forgotPassword,
+  resetPassword,
+} from "../controllers/user.controller.js";
 import isAuthenticated from "../middlewares/isAuthenticated.js";
 import { singleUpload } from "../middlewares/mutler.js";
 
 const router = express.Router();
 
-router.route("/register").post(singleUpload, register);
-router.route("/login").post(login);
-router.route("/logout").get(logout);
-router.route("/profile/update").post(isAuthenticated, singleUpload, updateProfile);
+router.post("/register", singleUpload, register);
+router.post("/login", login);
+router.get("/logout", logout);
+router.post("/profile/update", isAuthenticated, singleUpload, updateProfile);
 
 // Forgot password & reset password routes
-router.route("/forgot-password").post(forgotPassword); // POST to request a reset email
-router.route("/reset-password/:token").post(resetPassword); // POST to reset the password using the token
+router.post("/forgot-password", forgotPassword);  // ✅ Sends reset email
+router.post("/reset-password/:token", resetPassword);   // ✅ Resets password
 
 export default router;

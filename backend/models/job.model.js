@@ -13,19 +13,19 @@ const jobSchema = new mongoose.Schema({
         type: String
     }],
     salary: {
-        type: Number,
+        type: mongoose.Schema.Types.Mixed,  // This allows salary to be a number, string, or both
         required: true
     },
-    experienceLevel:{
-        type:Number,
-        required:true,
+    experienceLevel: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true
     },
     location: {
         type: String,
         required: true
     },
     jobType: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: true
     },
     position: {
@@ -48,5 +48,6 @@ const jobSchema = new mongoose.Schema({
             ref: 'Application',
         }
     ]
-},{timestamps:true});
+}, {timestamps: true});
+
 export const Job = mongoose.model("Job", jobSchema);

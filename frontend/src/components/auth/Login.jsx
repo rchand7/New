@@ -59,8 +59,8 @@ const Login = () => {
         <div>
             <Navbar />
             <div className='flex items-center justify-center max-w-7xl mx-auto'>
-                <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
-                    <h1 className='font-bold text-xl mb-5'>Login</h1>
+                <form onSubmit={submitHandler} className='w-full sm:w-3/4 md:w-1/2 border border-gray-200 rounded-md p-4 my-10'>
+                    <h1 className='font-bold text-2xl sm:text-xl mb-5 text-center'>Login</h1>
                     <div className='my-2'>
                         <Label>Email</Label>
                         <Input
@@ -68,7 +68,7 @@ const Login = () => {
                             value={input.email}
                             name="email"
                             onChange={changeEventHandler}
-                            placeholder="patel@gmail.com"
+                            placeholder="Arjun@gmail.com"
                         />
                     </div>
 
@@ -82,8 +82,9 @@ const Login = () => {
                             placeholder="********"
                         />
                     </div>
-                    <div className='flex items-center justify-between'>
-                        <RadioGroup className="flex items-center gap-4 my-5">
+
+                    <div className='my-5'>
+                        <RadioGroup className="flex flex-col sm:flex-row items-center justify-between">
                             <div className="flex items-center space-x-2">
                                 <Input
                                     type="radio"
@@ -108,13 +109,19 @@ const Login = () => {
                             </div>
                         </RadioGroup>
                     </div>
-                    {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Login</Button>
-                    }
-                    <span className='text-sm'>Don't have an account? <Link to="/signup" className='text-blue-600'>Signup</Link></span>
 
-                    {/* Forgot Password Link */}
-                    <div className='text-sm mt-4'>
+                    {loading ? 
+                        <Button className="w-full my-4">
+                            <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait
+                        </Button> : 
+                        <Button type="submit" className="w-full my-4">Login</Button>
+                    }
+
+                    <div className='text-sm text-center'>
+                        <span>Don't have an account? <Link to="/signup" className='text-blue-600'>Signup</Link></span>
+                    </div>
+
+                    <div className='text-sm mt-4 text-center'>
                         <Link to="/forgot-password" className='text-blue-600'>Forgot Password?</Link>
                     </div>
                 </form>
